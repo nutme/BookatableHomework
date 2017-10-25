@@ -13,18 +13,25 @@ namespace GitHubInfo
         {
             this.resultsParser = resultsParser;
         }
-
-
-        public SearchResult[] LookUpTopMatches(string searchString, int numberOfResults)
+    
+        public RepositorySearchResult[] LookUpTopRepositories(string searchString, int numberOfResults)
         {
             var searchUrl = new Uri($"https://api.github.com/search/repositories?q={searchString}&sort=stars&order=desc");
-            var request = CreateGetRequest(searchUrl);
-
-            var results = GetResponse(request);
+            var results = MakeRequest(searchUrl);
 
             return resultsParser.ParseRepositorySearchResults(
                 results,
                 GetNumberOfResultsToTake(numberOfResults, resultsParser.ParseNumberOfResults(results)));
+        }
+
+        public CommitSearchResult[] LookUpRecentCommits(string owner, string repository, int numberOfCommits)
+        {
+            var searchUrl = new Uri($"https://api.github.com/repos/{owner}/{repository}/commits");
+            var results = MakeRequest(searchUrl);
+
+            return resultsParser.ParseCommitSearchResults(
+                results,
+                GetNumberOfResultsToTake(numberOfCommits, resultsParser.ParseNumberOfResults(results)));
         }
 
         private HttpWebRequest CreateGetRequest(Uri uri)
@@ -51,6 +58,14 @@ namespace GitHubInfo
                 var results = JsonConvert.DeserializeObject<dynamic>(jsonResults);
                 return results;
             }
+        }
+
+        private dynamic MakeRequest(Uri searchUrl)
+        {
+            var request = CreateGetRequest(searchUrl);
+
+            var results = GetResponse(request);
+            return results;
         }
 
         private int GetNumberOfResultsToTake(int numberAsked, int numberAvailable)

@@ -9,13 +9,13 @@ namespace GitHubInfo
             return (int)results["total_count"];
         }
 
-        public SearchResult[] ParseRepositorySearchResults(dynamic results, int numberOfResultsToTake)
+        public RepositorySearchResult[] ParseRepositorySearchResults(dynamic results, int numberOfResultsToTake)
         {
-            var parsedResults = new List<SearchResult>();
+            var parsedResults = new List<RepositorySearchResult>();
             for (var index = 0; index < numberOfResultsToTake; index++)
             {
                 var result = results["items"][index];
-                parsedResults.Add(new SearchResult(
+                parsedResults.Add(new RepositorySearchResult(
                     result["name"].ToString(),
                     result["owner"]["login"].ToString(),
                     result["html_url"].ToString(),
@@ -25,6 +25,11 @@ namespace GitHubInfo
             }
 
             return parsedResults.ToArray();
+        }
+        
+        public CommitSearchResult[] ParseCommitSearchResults(dynamic results, int numberOfResultsToTake)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

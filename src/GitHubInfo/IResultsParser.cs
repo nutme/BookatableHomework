@@ -3,6 +3,7 @@
     public interface IResultsParser
     {
         int ParseNumberOfResults(dynamic results);
-        SearchResult[] ParseRepositorySearchResults(dynamic results, int numberOfResultsToTake);
+        RepositorySearchResult[] ParseRepositorySearchResults(dynamic results, int numberOfResultsToTake);
+        CommitSearchResult[] ParseCommitSearchResults(dynamic results, int numberOfResultsToTake);
     }
 }

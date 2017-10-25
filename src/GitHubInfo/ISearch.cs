@@ -2,6 +2,7 @@
 {
     public interface ISearch
     {
-        SearchResult[] LookUpTopMatches(string searchString, int numberOfResults);
+        RepositorySearchResult[] LookUpTopRepositories(string searchString, int numberOfResults);
+        CommitSearchResult[] LookUpRecentCommits(string owner, string rep, int numberOfCommits);
     }
 }
