@@ -47,7 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchTests.cs" />
+    <Compile Include="CommitSearchTests.cs" />
+    <Compile Include="RepositorySearchTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitHubInfo\GitHubInfo.csproj">

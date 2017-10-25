@@ -4,7 +4,7 @@ using System.Linq;
 namespace GitHubInfo.Tests
 {
     [TestFixture]
-    public class SearchTests
+    public class RepositorySearchTests
     {
         [Test]
         public void SearchByStringReturnsTop5Results()
@@ -41,10 +41,10 @@ namespace GitHubInfo.Tests
             Assert.That(results.Count(), Is.EqualTo(0));
         }
 
-        private SearchResult[] Search(string criteria)
+        private RepositorySearchResult[] Search(string criteria)
         {
             var search = new Search(new ResultsParser());
-            var results = search.LookUpTopMatches(criteria, 5);
+            var results = search.LookUpTopRepositories(criteria, 5);
             return results;
         }
     }
