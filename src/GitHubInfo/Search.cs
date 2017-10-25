@@ -28,13 +28,18 @@ namespace GitHubInfo
                     throw new Exception("Empty result from GitHub.com");
                 }
 
-                var results = JsonConvert.DeserializeObject<dynamic>(jsonResults)["items"];
+                var results = JsonConvert.DeserializeObject<dynamic>(jsonResults);
+
+                var totalResultsCount = (int)results["total_count"];
+                if (numberOfResults > totalResultsCount)
+                {
+                    numberOfResults = totalResultsCount;
+                }
 
                 var parsedResults = new List<SearchResult>();
-
                 for (var index = 0; index < numberOfResults; index++)
                 {
-                    var result = results[index];
+                    var result = results["items"][index];
                     parsedResults.Add(new SearchResult(
                         result["name"].ToString(),
                         result["owner"]["login"].ToString(),
