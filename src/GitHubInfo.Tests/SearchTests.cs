@@ -43,7 +43,7 @@ namespace GitHubInfo.Tests
 
         private SearchResult[] Search(string criteria)
         {
-            var search = new Search();
+            var search = new Search(new ResultsParser());
             var results = search.LookUpTopMatches(criteria, 5);
             return results;
         }
