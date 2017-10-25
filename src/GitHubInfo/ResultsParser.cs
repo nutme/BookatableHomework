@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace GitHubInfo
 {
@@ -6,7 +7,7 @@ namespace GitHubInfo
     {
         public int ParseNumberOfResults(dynamic results)
         {
-            return (int)results["total_count"];
+            return ((JArray)results).Count;
         }
 
         public RepositorySearchResult[] ParseRepositorySearchResults(dynamic results, int numberOfResultsToTake)
@@ -29,7 +30,19 @@ namespace GitHubInfo
         
         public CommitSearchResult[] ParseCommitSearchResults(dynamic results, int numberOfResultsToTake)
         {
-            throw new System.NotImplementedException();
+            var parsedResults = new List<CommitSearchResult>();
+            for (var index = 0; index < numberOfResultsToTake; index++)
+            {
+                var result = results[index];
+                parsedResults.Add(new CommitSearchResult(
+                    result["commit"]["committer"]["name"].ToString(),
+                    result["commit"]["message"].ToString(),
+                    result["sha"].ToString(),
+                    result["commit"]["committer"]["date"].ToString()
+                ));
+            }
+
+            return parsedResults.ToArray();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace GitHubInfo
 
             return resultsParser.ParseRepositorySearchResults(
                 results,
-                GetNumberOfResultsToTake(numberOfResults, resultsParser.ParseNumberOfResults(results)));
+                GetNumberOfResultsToTake(numberOfResults, resultsParser.ParseNumberOfResults(results["items"])));
         }
 
         public CommitSearchResult[] LookUpRecentCommits(string owner, string repository, int numberOfCommits)

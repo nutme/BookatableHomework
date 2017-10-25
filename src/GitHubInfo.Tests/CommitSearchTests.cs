@@ -9,7 +9,7 @@ namespace GitHubInfo.Tests
         public void SearchResultsAreNotEmpty()
         {
             var search = new Search(new ResultsParser());
-            var results = search.LookUpRecentCommits("admin", "cable", 5);
+            var results = search.LookUpRecentCommits("nutme", "BookatableHomework", 5);
 
             foreach (var result in results)
             {
