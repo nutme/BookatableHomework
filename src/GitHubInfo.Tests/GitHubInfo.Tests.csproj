@@ -50,7 +50,16 @@
     <Compile Include="SearchTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubInfo\GitHubInfo.csproj">
+      <Project>{a4d9cf6c-d739-455c-8e41-0cf24046963f}</Project>
+      <Name>GitHubInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

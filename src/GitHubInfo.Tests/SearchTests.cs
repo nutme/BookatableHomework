@@ -1,9 +1,10 @@
 ﻿using NUnit.Framework;
+using System.Linq;
 
 namespace GitHubInfo.Tests
 {
     [TestFixture]
-    class SearchTests
+    public class SearchTests
     {
         [Test]
         public void SearchByStringReturnsTop5Results()
